@@ -29,11 +29,13 @@ class CartController extends Controller
 
     public function addToCart(Request $request, $id)
     {
+        $totalQty = $request->input('quantity');
+        
         $product = Product::find($id);
 
         $oldcart = Session('cart') ? Session('cart') : null;
         $cart = new Cart($oldcart);
-        $cart->add($product, $product->id);
+        $cart->add($product, $product->id, $totalQty);
         $request->session()->put('cart', $cart);
 
         return back()->with('success', 'Add to Cart success!');
@@ -84,11 +86,11 @@ class CartController extends Controller
 
         if (session()->has('cart')) {
             session()->pull('cart');
-            return redirect('/home');
+            return redirect('/home')->with('success', 'Checkout success!');
         }
     }
 
-    
+
 
     public function deleteItemCart($id)
     {

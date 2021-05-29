@@ -38,7 +38,15 @@
                 </div>
             </div>
             <!--END NAVBAR -->
-
+            <div class="small-container">
+                <h4 class="title">
+                    @if(Session::get('success'))
+                    <div class="alert alert-success">
+                        {{ Session::get('success') }}
+                    </div>
+                    @endif
+                </h4>
+            </div>
             <!--START Banner -->
             <div class="myrow">
                 <div class="my-col-2">
@@ -53,7 +61,6 @@
             <!--END Banner -->
         </div>
     </div>
-    
 
     <!--START CATEGORY -->
     <div class="category">

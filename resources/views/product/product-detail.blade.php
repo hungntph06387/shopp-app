@@ -56,13 +56,16 @@
                 <img src="/images/{{$product->image}}" alt="" width="100%" height="200px">
             </div>
             <div class="my-col-2">
+                <form action="/add-to-cart/{{$product->id}}" method="get">
+                @csrf
                 <h2>{{$product->name}}</h2>
                 <h4>{{$product->price}}</h4>
-                <input type="number" value="1">
-                <a href="/add-to-cart/{{$product->id}}" class="my-btn">Add To Cart</a>
+                <input type="number" name="quantity" value="1">
+                <button type="submit" class="btn btn-secondary">Add To Cart</button>
                 <h3>Product Detail</h3>
                 <small>{{$product->description}}</small><br>
                 <a href="/" class="my-btn"> Buy Continue</a>
+                </form>
             </div>
         </div>
     </div>
