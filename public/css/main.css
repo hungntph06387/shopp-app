@@ -455,3 +455,13 @@ label{
 .small-container-category ul li a{
     color:rgb(221, 96, 173);
 }
+
+.my-btn-remove{
+    display: inline-block;
+    background: #e9ec0a;
+    color: #fff;
+    padding: 8px 30px;
+    margin: 30px 0;
+    border-radius: 30px;
+    transition: 0.5s;
+}

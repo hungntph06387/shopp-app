@@ -41,7 +41,8 @@
     <!--START CART -->
     
     <div class="small-container cart-page">
-    <a href="/" class="my-btn"> Buy Continue</a>
+    <a href="/home" class="my-btn"> Buy Continue</a>
+    <a href="/removeCart" class="my-btn-remove">Remove Cart</a>
         <table>
             <thead>
                 <tr>
@@ -80,6 +81,12 @@
                 <tr>
                     <td>Total</td>
                     <td> {{ Session::has('cart') ? Session::get('cart')->totalPrice : ''}} </td>
+                </tr>
+                <tr>
+                <td></td>
+                    <td>
+                        <a href="/checkout" class="btn btn-success" role="button" aria-pressed="true">Checkout</a>
+                    </td>
                 </tr>
             </table>
         </div>

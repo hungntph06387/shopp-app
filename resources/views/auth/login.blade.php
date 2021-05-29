@@ -30,7 +30,7 @@
                 <p style="color: red;">@error('email'){{$message}}@enderror</p>
                 <div class="field space">
                     <span class="fa fa-lock"></span>
-                    <input type="password" name="password" placeholder="Enter password">
+                    <input type="password" id="" name="password" placeholder="Enter password">
                 </div>
                 <p style="color: red;">@error('password'){{$message}}@enderror</p>
                 <div class="pass">
@@ -48,6 +48,8 @@
             </form>
         </div>
     </div>
+
+    
 </body>
 
 </html>

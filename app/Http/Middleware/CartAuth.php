@@ -17,9 +17,18 @@ class CartAuth
      */
     public function handle(Request $request, Closure $next)
     {
+
+        $path = $request->path();
+
         if((FacadesSession::get('LoggedUser')==null)){
             return redirect('/login');
         }
         return $next($request);
+
+        if($path=='checkout' && (FacadesSession::get('LoggedUser')==null))
+        {
+           return redirect('/login');
+        }
+
     }
 }

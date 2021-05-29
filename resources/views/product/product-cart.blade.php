@@ -38,13 +38,14 @@
     </div>
 
     <!--START CART -->
-    
+
     <div class="small-container cart-page">
-    <a href="/" class="my-btn"> Buy Continue</a>
+        <a href="/" class="my-btn"> Buy Continue</a>
+        <a href="/removeCart" class="my-btn-remove"> Remove Cart</a>
         <table>
             <thead>
                 <tr>
-                <th>ID</th>
+                    <th>ID</th>
                     <th>Product</th>
                     <th>Image</th>
                     <th>Price</th>
@@ -57,7 +58,7 @@
             <tbody>
                 @foreach(Session::get('cart')->items as $item)
                 <tr>
-                <td>{{$item['item']->id}}</td>
+                    <td>{{$item['item']->id}}</td>
                     <td>{{$item['item']->name}}</td>
                     <td>
                         <img src="/images/{{$item['item']->image}}" alt="" width="150px" height="150px">
@@ -65,8 +66,8 @@
                     <td>{{$item['item']->price}}</td>
                     <td>{{$item['qty']}}</td>
                     <td>{{$item['price']}}</td>
-                    <td> 
-                    <a href="/delete-item-cart/{{$item['item']->id}}" class="btn btn-warning btn-block" role="button" aria-pressed="true">Remove</a>
+                    <td>
+                        <a href="/delete-item-cart/{{$item['item']->id}}" class="btn btn-warning btn-block" role="button" aria-pressed="true">Remove</a>
                     </td>
                 </tr>
                 @endforeach
@@ -78,7 +79,14 @@
             <table>
                 <tr>
                     <td>Total</td>
-                    <td> {{ Session::has('cart') ? Session::get('cart')->totalPrice : ''}} </td>
+                    <td> {{ Session::has('cart') ? Session::get('cart')->totalPrice : ''}}</td>
+                </tr>
+                <tr>
+                   <td></td>
+                    <td>
+                        <a href="/checkout" class="btn btn-success" role="button" aria-pressed="true">Checkout</a>
+                    </td>
+
                 </tr>
             </table>
         </div>

@@ -55,6 +55,8 @@ class Auth
             }
         }
 
+        
+
         return $next($request);
     }
 }

@@ -31,18 +31,27 @@
                 <div class="cart">
                     <img src="/images/cart.png" alt="" width="40px" height="40px">
                     <a href="/cart">Cart( {{ Session::has('cart') ? Session::get('cart')->totalQty : ''}} )</a>
-                    
+
                 </div>
                 <div class="account">
 
                     <a href="#">{{$user->name}}</a> / <a href="/logout">Logout</a>
                 </div>
-                
+
             </div>
             <!--END NAVBAR -->
 
             <!--START Banner -->
             <!--END Banner -->
+        </div>
+        <div class="small-container">
+            <h4 class="title">
+                @if(Session::get('success'))
+                <div class="alert alert-success">
+                    {{ Session::get('success') }}
+                </div>
+                @endif
+            </h4>
         </div>
     </div>
     <div class="small-container single-product">
@@ -57,6 +66,7 @@
                 <a href="/add-to-cart/{{$product->id}}" class="my-btn">Add To Cart</a>
                 <h3>Product Detail</h3>
                 <small>{{$product->description}}</small><br>
+                <a href="/home" class="my-btn"> Buy Continue</a>
             </div>
         </div>
     </div>

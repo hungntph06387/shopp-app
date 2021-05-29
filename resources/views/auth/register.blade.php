@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WatchStore | Ecommerce Website</title>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 
@@ -22,10 +23,10 @@
             @endif
             <header>Register Form</header>
             <form action="/register" method="post">
-            @csrf
+                @csrf
                 <div class="field">
                     <span class=""></span>
-                    <input type="text" name="name" placeholder="Enter your name" value="{{ old('name') }}">   
+                    <input type="text" name="name" placeholder="Enter your name" value="{{ old('name') }}">
                 </div>
                 <p style="color: red;">@error('name'){{$message}}@enderror</p>
                 <div class="field space">
@@ -35,15 +36,22 @@
                 <p style="color: red;">@error('email'){{$message}}@enderror</p>
                 <div class="field space">
                     <span class=""></span>
-                    <input type="password" name="password" placeholder="Enter password">
+                    <input type="password"  name="password" placeholder="Enter password">
                 </div>
                 <p style="color: red;">@error('password'){{$message}}@enderror</p>
                 <div class="field space">
                     <span class=""></span>
-                    <input type="password" placeholder="Confirm password">
+                    <input type="password" name="pwcf" placeholder="Confirm password">
                     <br>
                 </div>
-                <p style="color: red;">@error('cfpw'){{$message}}@enderror</p>
+                <p style="color: red;">@error('pwcf'){{$message}}@enderror</p>
+                @if(Session::get('fail'))
+                <p style="color: red;">
+                    {{ Session::get('fail') }}
+                </p>
+                @endif
+                
+
                 <button type="submit" class="my-btn1">Register</button>
                 <div class="singup">You have account?
                     <a href="/login">Login Now</a>

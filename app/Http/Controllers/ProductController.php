@@ -127,4 +127,5 @@ class ProductController extends Controller
         
         return view('home-user', compact('products', 'categories', 'user'));
     }
+
 }

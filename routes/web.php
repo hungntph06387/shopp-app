@@ -50,9 +50,13 @@ Route::get('/productDetail/{id}', [ProductController::class, 'detail']);
 Route::get('/productDetailU/{id}', [ProductController::class, 'detailU']);
 
 Route::get('add-to-cart/{id}', [CartController::class, 'addToCart']);
+Route::get('removeCart', [CartController::class, 'removeCart']);
 Route::get('delete-item-cart/{id}', [CartController::class, 'deleteItemCart']);
 Route::get('/cart', [CartController::class, 'index'])->name('cart');
 Route::get('/cartU', [CartController::class, 'cartUser'])->name('cartU');
+Route::get('/checkout', [CartController::class, 'checkout'])->middleware('protectedCart');
+Route::post('/checkout', [CartController::class, 'checkouted']);
+
 
 
 

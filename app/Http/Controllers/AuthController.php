@@ -15,23 +15,24 @@ class AuthController extends Controller
     }
 
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
         $request->validate([
-            'email'=>['required', 'email'],
-            'password'=>['required', 'min:6', 'max:18']
+            'email' => ['required', 'email'],
+            'password' => ['required', 'min:6', 'max:18']
         ]);
-        
+
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
             $request->session()->put('LoggedUser', $request->email);
             $user = User::where('email', '=', session('LoggedUser'))->first();
-            if($user->role == 1){
-                
+            if ($user->role == 1) {
+
                 return redirect()->intended('admin');
             }
 
-            return redirect()->intended('home'); 
+            return redirect()->intended('home');
         }
 
         return back()->with('fail', 'Email or password fail!');
@@ -45,24 +46,29 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+
         $request->validate([
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
-            'password' => ['required','min:6', 'max:18'],
-            
+            'password' => ['required', 'min:6', 'max:18'],
+            'pwcf' => ['required'],
+
         ]);
 
-        $user = new User();
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
-        $user->verification_code = sha1(time());
-        $user->save();
+        if ($request->input('password') == $request->input('pwcf')) {
+            $user = new User();
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = Hash::make($request->input('password'));
+            $user->verification_code = sha1(time());
+            $user->save();
 
-        if($user != null){
-            MailController::sendSingupEmail($user->name, $user->email, $user->verification_code);
-            return redirect()->back()->with('success', 'Create account success. Please check email!');
+            if ($user != null) {
+                MailController::sendSingupEmail($user->name, $user->email, $user->verification_code);
+                return redirect()->back()->with('success', 'Create account success. Please check email!');
+            }
         }
+        return back()->with('fail', 'Confirm password fail');
     }
 
 
@@ -80,7 +86,7 @@ class AuthController extends Controller
 
     public function logout()
     {
-        if(session()->has('LoggedUser') &&session()->has('cart')){
+        if (session()->has('LoggedUser') || session()->has('cart')) {
             session()->pull('LoggedUser');
             session()->pull('cart');
             return redirect('/');
