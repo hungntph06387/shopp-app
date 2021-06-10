@@ -50,7 +50,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $user = User::where('email', '=', session('LoggedUser'))->first();
 
-        return view('product.product-detailU', compact('product', 'user'));
+        return view('product.product-detail', compact('product', 'user'));
     }
 
 
