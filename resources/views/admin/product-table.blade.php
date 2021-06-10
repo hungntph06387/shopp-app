@@ -62,7 +62,11 @@
                         <a class="nav-link collapsed" href="/account-table">
                             Acounts
                         </a>
-                        <div class="sb-sidenav-menu-heading">Pages</div>
+                        <div class="sb-sidenav-menu-heading">
+                        <a class="nav-link collapsed" href="/home">
+                            Home
+                        </a>
+                        </div>
 
                     </div>
                 </div>
@@ -115,7 +119,6 @@
                                             <th>Name</th>
                                             <th>Price</th>
                                             <th>Image</th>
-                                            <th>Category_id</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -128,7 +131,6 @@
                                             <td>
                                                 <img style="width: 100px; height: 120px;" src="/images/{{ $product->image }}" alt="">
                                             </td>
-                                            <td>{{ $product->categories_id }}</td>
                                             <td>
                                                 <a href="/product/{{ $product->id }}/edit" class="btn btn-danger btn-block" role="button" aria-pressed="true">Edit</a>
                                                 <a href="/delete/{{ $product->id }}" class="btn btn-warning btn-block" role="button" aria-pressed="true">Delete</a>

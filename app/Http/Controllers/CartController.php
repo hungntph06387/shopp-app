@@ -20,12 +20,6 @@ class CartController extends Controller
         return view('product.product-cart', compact('products'));
     }
 
-    public function cartUser(Request $request)
-    {
-        $products = Product::all();
-        //dd($request->session()->get('cart'));
-        return view('product.product-cartU', compact('products'));
-    }
 
     public function addToCart(Request $request, $id)
     {
@@ -46,7 +40,7 @@ class CartController extends Controller
         if (session()->has('LoggedUser') && session()->has('cart')) {
 
             session()->pull('cart');
-            return redirect('/home');
+            return redirect('/');
         } else {
             session()->pull('cart');
             return redirect('/');
@@ -86,7 +80,7 @@ class CartController extends Controller
 
         if (session()->has('cart')) {
             session()->pull('cart');
-            return redirect('/home')->with('success', 'Checkout success!');
+            return redirect('/')->with('success', 'Checkout success!');
         }
     }
 

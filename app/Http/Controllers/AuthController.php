@@ -32,7 +32,7 @@ class AuthController extends Controller
                 return redirect()->intended('admin');
             }
 
-            return redirect()->intended('home');
+            return redirect()->intended('/');
         }
 
         return back()->with('fail', 'Email or password fail!');
@@ -55,20 +55,16 @@ class AuthController extends Controller
 
         ]);
 
-        if ($request->input('password') == $request->input('pwcf')) {
-            $user = new User();
-            $user->name = $request->input('name');
-            $user->email = $request->input('email');
-            $user->password = Hash::make($request->input('password'));
-            $user->verification_code = sha1(time());
-            $user->save();
-
-            if ($user != null) {
-                MailController::sendSingupEmail($user->name, $user->email, $user->verification_code);
-                return redirect()->back()->with('success', 'Create account success. Please check email!');
-            }
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = Hash::make($request->input('password'));
+        $user->verification_code = sha1(time());    
+        if ($user->save()) {
+            MailController::sendSingupEmail($user->name, $user->email, $user->verification_code);
+            return redirect()->back()->with('success', 'Create account success. Please check email!');
         }
-        return back()->with('fail', 'Confirm password fail');
+        
     }
 
 
@@ -89,7 +85,7 @@ class AuthController extends Controller
         if (session()->has('LoggedUser') || session()->has('cart')) {
             session()->pull('LoggedUser');
             session()->pull('cart');
-            return redirect('/');
+            return redirect()->intended('/');
         }
     }
 

@@ -25,7 +25,7 @@
                         <li><a href="/home">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
-                        <li><a href="#">Login</a></li>
+                        <li><a href="/login">Login</a></li>
                     </ul>
                 </nav>
                 <div class="cart">
@@ -33,11 +33,12 @@
                     <a href="/cart">Cart( {{ Session::has('cart') ? Session::get('cart')->totalQty : ''}} )</a>
 
                 </div>
-                <div class="account">
+                @if(Session::has('LoggedUser'))
+                 <div class="account">
 
                     <a href="#">{{$user->name}}</a> / <a href="/logout">Logout</a>
                 </div>
-
+                @endif
             </div>
             <!--END NAVBAR -->
 

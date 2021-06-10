@@ -20,7 +20,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required'],
+            'name' => ['required', 'unique:products'],
             'price' => ['required', 'numeric'],
             'description' => ['required'],
             'categories_id' => ['required'],
@@ -42,20 +42,18 @@ class ProductController extends Controller
         return back()->with('success', 'Add product success!');
     }
 
+   
+    
+
     public function detail($id)
-    {
-        $product = Product::findOrFail($id);
-
-        return view('product.product-detail', compact('product'));
-    }
-
-    public function detailU($id)
     {
         $product = Product::findOrFail($id);
         $user = User::where('email', '=', session('LoggedUser'))->first();
 
         return view('product.product-detailU', compact('product', 'user'));
     }
+
+
 
     public function edit($id)
     {
@@ -65,10 +63,12 @@ class ProductController extends Controller
         return view('product.edit-product', compact('categories', 'products'));
     }
 
+
+
     public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => ['required'],
+            'name' => ['required','unique:products'],
             'price' => ['required', 'numeric'],
             'description' => ['required'],
             'categories_id' => ['required'],
@@ -90,6 +90,8 @@ class ProductController extends Controller
         return back()->with('success', 'Update product success!');
     }
 
+
+
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
@@ -98,34 +100,29 @@ class ProductController extends Controller
         return back()->with('success', 'Delete product success!');
     }
 
+
+
     public function search(Request $request)
     {
         
-        $categories = Category::all();
+        
         $user = User::where('email', '=', session('LoggedUser'))->first();
         $search = $request->query('query');
         if($search){
             $products = Product::where('name', 'like','%'.$search.'%')->get();
             
-            return view('admin.product-table', compact('user', 'products', 'categories'));
+            return view('admin.product-table', compact('user', 'products'));
         }
     }
+
+    
     
     public function category($id)
     {
         $categories = Category::all();
         $products = Product::where('categories_id', $id)->get();
-
-        return view('home', compact('products', 'categories'));
-    }
-
-    public function categoryUser($id)
-    {
-        $categories = Category::all();
-        $products = Product::where('categories_id', $id)->get();
         $user = User::where('email', '=', session('LoggedUser'))->first();
         
-        return view('home-user', compact('products', 'categories', 'user'));
+        return view('/home', compact('products', 'categories', 'user'));
     }
-
 }

@@ -15,7 +15,7 @@
         <h3 style="color: blue;">Hello <em>{{$user->name}}</em></h3>
         <br>
         <h3>Sorry! Your role cannot access this page!</h3>
-        <a href="/home" class="my-btn">Back to home</a>
+        <a href="/" class="my-btn">Back to home</a>
     </div>
 </body>
 

@@ -40,10 +40,10 @@ class AdminController extends Controller
 
     public function admin()
     {
-        $products = Product::all();
+        $products = Product::orderBy('id', 'desc')->get();
         $categories = Category::all();
         $user = User::where('email', '=', session('LoggedUser'))->first();
-        
+
         return view('admin.product-table', compact('user', 'products', 'categories'));
     }
 }

@@ -32,6 +32,12 @@
                     <img src="/images/cart.png" alt="" width="40px" height="40px">
                     <a href="/cart">Cart( {{ Session::has('cart') ? Session::get('cart')->totalQty : ''}} )</a>
                 </div>
+                @if(Session::has('LoggedUser'))
+                 <div class="account">
+
+                    <a href="#">{{$user->name}}</a> / <a href="/logout">Logout</a>
+                </div>
+                @endif
             </div>
             <!--END NAVBAR -->
 

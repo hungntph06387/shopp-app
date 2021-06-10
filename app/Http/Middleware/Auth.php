@@ -42,10 +42,7 @@ class Auth
            return redirect('/login');
         }
 
-        if($path=='home' && (FacadesSession::get('LoggedUser')==null))
-        {
-           return redirect('/login');
-        }
+        
 
         if($path=='admin'||$path=='add-product' && (FacadesSession::get('LoggedUser')))
         {

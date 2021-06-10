@@ -49,7 +49,7 @@
     <!--START CART -->
 
     <div class="small-container cart-page">
-        <a href="/home" class="my-btn"> Buy Continue</a>
+        <a href="/" class="my-btn"> Buy Continue</a>
         <a href="/removeCart" class="my-btn-remove">Remove Cart</a>
         <table>
             <thead>

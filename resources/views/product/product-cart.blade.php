@@ -22,7 +22,7 @@
                 </div>
                 <nav class="">
                     <ul>
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/home">Home</a></li>
                         <li><a href="#">About</a></li>
                         <li><a href="#">Contact</a></li>
                         <li><a href="/login">Login</a></li>
@@ -32,16 +32,25 @@
                     <img src="/images/cart.png" alt="" width="40px" height="40px">
                     <a href="#">Cart( {{ Session::has('cart') ? Session::get('cart')->totalQty : ''}} )</a>
                 </div>
+
             </div>
             <!--END NAVBAR -->
         </div>
     </div>
-
+    <div class="small-container">
+        <h4 class="title">
+            @if(Session::get('success'))
+            <div class="alert alert-success">
+                {{ Session::get('success') }}
+            </div>
+            @endif
+        </h4>
+    </div>
     <!--START CART -->
 
     <div class="small-container cart-page">
         <a href="/" class="my-btn"> Buy Continue</a>
-        <a href="/removeCart" class="my-btn-remove"> Remove Cart</a>
+        <a href="/removeCart" class="my-btn-remove">Remove Cart</a>
         <table>
             <thead>
                 <tr>
@@ -79,14 +88,13 @@
             <table>
                 <tr>
                     <td>Total</td>
-                    <td> {{ Session::has('cart') ? Session::get('cart')->totalPrice : ''}}</td>
+                    <td> {{ Session::has('cart') ? Session::get('cart')->totalPrice : ''}} </td>
                 </tr>
                 <tr>
-                   <td></td>
+                    <td></td>
                     <td>
                         <a href="/checkout" class="btn btn-success" role="button" aria-pressed="true">Checkout</a>
                     </td>
-
                 </tr>
             </table>
         </div>
